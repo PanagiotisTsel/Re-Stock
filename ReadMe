@@ -1,0 +1,121 @@
+ReStock
+
+A simple cross-platform .NET MAUI app that uses SQLite for local data storage. Works on Android, iOS, and MacCatalyst.
+
+What You Need
+
+Before running this project, make sure you have:
+macOS (latest version recommended)
+.NET 10 SDK
+Visual Studio for Mac or command-line tools
+Java JDK 17 (required for Android builds)
+Android SDK with the required API levels installed
+
+Getting Started
+
+Install .NET 10
+First, make sure you have .NET 10 installed:
+dotnet --version
+You should see something like 10.0.xxx.
+Install MAUI Workloads
+Install the required MAUI tools and workloads:
+sudo dotnet workload restore
+
+This ensures you have all the bits needed to build Android, iOS, and MacCatalyst apps.
+Install Java JDK 17
+Android builds require JDK 17, so let’s make sure you’re using it:
+/usr/libexec/java_home -V   # see which JDKs you have
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+export PATH=$JAVA_HOME/bin:$PATH
+java -version
+javac -version
+
+
+Expected output should show version 17:
+
+openjdk version "17.0.x"
+javac 17.0.x
+
+Install Android SDK & API Levels
+
+Check what Android SDK platforms you have:
+
+ls ~/Library/Developer/Xamarin/android-sdk-macosx/platforms/
+
+
+If you’re missing API 36 (required for this project), install it:
+
+~/Library/Developer/Xamarin/android-sdk-macosx/tools/bin/sdkmanager "platforms;android-36"
+
+
+Then accept licenses:
+
+dotnet build -t:InstallAndroidDependencies -f net10.0-android -p:AndroidSdkDirectory=~/Library/Developer/Xamarin/android-sdk-macosx -p:AcceptAndroidSDKLicenses=true
+
+
+Replace ~ with your home directory if needed.
+
+Build and Run
+Clean the project
+dotnet clean
+
+Build for Android
+dotnet build -f net10.0-android
+
+Build for iOS Simulator
+dotnet build -f net10.0-ios
+
+Build for MacCatalyst
+dotnet build -f net10.0-maccatalyst
+
+Troubleshooting
+Java SDK issues
+
+If you see errors about Java or JDK versions:
+
+Exception: Not a directory (Parameter 'homePath')
+
+
+Make sure JAVA_HOME is pointing to JDK 17:
+
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+export PATH=$JAVA_HOME/bin:$PATH
+
+Missing Android API
+
+If you see:
+
+Could not find android.jar for API level 36
+
+
+Install the API level:
+
+sdkmanager "platforms;android-36"
+
+Android SDK licenses not accepted
+
+If the build says:
+
+The Android SDK license agreements were not accepted
+
+
+Accept them:
+
+dotnet build -t:InstallAndroidDependencies -f net10.0-android -p:AcceptAndroidSDKLicenses=true
+
+Notes
+
+Make sure you always use .NET 10. Older versions might not work.
+
+Always have JDK 17 installed for Android.
+
+Restore MAUI workloads whenever you update the .NET SDK.
+
+For iOS and MacCatalyst, make sure Xcode and the simulator are installed
+
+dotnet run --framework net10.0-ios
+
+dotnet clean             
+dotnet build -f net10.0-ios
+xcrun simctl shutdown all
+xcrun simctl erase all

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:ReStock.Models"
+             x:Class="ReStock.Views.ReStockItemPage"
+             Title="Edit Item"
+             x:DataType="models:ReStockItem"
+             >
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+
+            <!-- Item Name -->
+            <Label Text="Item Name" FontAttributes="Bold"/>
+            <Entry Text="{Binding Name}" Placeholder="Enter item name"/>
+
+            <!-- Quantity Controls -->
+            <Label Text="Quantity" FontAttributes="Bold"/>
+            <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+                <Button Text="−" Clicked="DecreaseQuantity" WidthRequest="50" HeightRequest="50"/>
+                <Label Text="{Binding Quantity}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="24"/>
+                <Button Text="+" Clicked="IncreaseQuantity" WidthRequest="50" HeightRequest="50"/>
+                
+            </Grid>
+
+            <!-- Done/Status Toggle -->
+            <Label Text="Done?" FontAttributes="Bold"/>
+            <Switch IsToggled="{Binding Done}" />
+
+            <!-- Action Buttons -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Button Text="Save" Clicked="OnSaveClicked" BackgroundColor="#4CAF50" TextColor="White"/>
+                <Button Text="Cancel" Clicked="OnCancelClicked" BackgroundColor="#F44336" TextColor="White"/>
+            </Grid>
+
+            <!-- Optional Delete Button -->
+            <Button Text="Delete" Clicked="OnDeleteClicked" BackgroundColor="#9E9E9E" TextColor="White"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

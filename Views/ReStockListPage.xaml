@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:ReStock.Models"
+             x:Class="ReStock.Views.ReStockListPage"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:views="clr-namespace:ReStock.Views"
+             ios:Page.UseSafeArea="True"
+             Title="ReStock"
+             x:DataType="views:ReStockListPage">
+
+    <Grid RowDefinitions="Auto, *, Auto">
+        <!-- Picker for sorting -->
+        <Picker Grid.Row="0"
+                x:Name="SortPicker"
+                Title="Sort by"
+                SelectedIndexChanged="SortPicker_SelectedIndexChanged">
+            <Picker.Items>
+                <x:String>Quantity (Low - High)</x:String>
+                <x:String>Quantity (High - Low)</x:String>
+                <x:String>Name (A - Z)</x:String>
+                <x:String>Name (Z - A)</x:String>
+            </Picker.Items>
+        </Picker>
+
+        <!-- CollectionView for items -->
+        <CollectionView Grid.Row="1"
+                        VerticalOptions="Fill"
+                        ItemsSource="{Binding Items}"
+                        SelectionMode="Single"
+                        SelectionChanged="CollectionView_SelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ReStockItem">
+                    <Grid ColumnDefinitions="*, Auto" Padding="20">
+                        <Label Text="{Binding Name}"
+                               VerticalTextAlignment="Center"/>
+                        <Label Text="{Binding Quantity}"
+                               Grid.Column="1"
+                               VerticalTextAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Add Item button -->
+        <Button Grid.Row="2"
+                Text="Add New Item"
+                Clicked="OnItemAdded"
+                Margin="20"/>
+    </Grid>
+</ContentPage>
