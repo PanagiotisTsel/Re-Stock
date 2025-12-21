@@ -10,7 +10,7 @@ public class ReStockItemDatabase
     public ReStockItemDatabase(string dbPath)
     {
         _database = new SQLiteAsyncConnection(dbPath);
-        // Creates the table if it doesn't exist
+        //_database.DropTableAsync<ReStockItem>().Wait();
         _database.CreateTableAsync<ReStockItem>().Wait();
     }
 
@@ -20,8 +20,21 @@ public class ReStockItemDatabase
     public Task<ReStockItem> GetItemAsync(int id) =>
         _database.Table<ReStockItem>().Where(i => i.ID == id).FirstOrDefaultAsync();
 
-    public Task<int> SaveItemAsync(ReStockItem item) =>
-        item.ID != 0 ? _database.UpdateAsync(item) : _database.InsertAsync(item);
+   public async Task<int> SaveItemAsync(ReStockItem item)
+{
+    if (item.ID != 0)
+    {
+        Console.WriteLine($"Updating item ID={item.ID}, Name={item.Name}");
+        return await _database.UpdateAsync(item);
+    }
+    else
+    {
+        int result = await _database.InsertAsync(item);
+        Console.WriteLine($"Inserted new item: ID={item.ID}, Name={item.Name}, Qty={item.Quantity}");
+        return result;
+    }
+}
+
 
     public Task<int> DeleteItemAsync(ReStockItem item) =>
         _database.DeleteAsync(item);

@@ -4,28 +4,26 @@
              xmlns:models="clr-namespace:ReStock.Models"
              x:Class="ReStock.Views.ReStockItemPage"
              Title="Edit Item"
-             x:DataType="models:ReStockItem"
-             >
+             x:DataType="models:ReStockItem">
 
     <ScrollView>
         <StackLayout Padding="20" Spacing="15">
 
             <!-- Item Name -->
             <Label Text="Item Name" FontAttributes="Bold"/>
-            <Entry Text="{Binding Name}" Placeholder="Enter item name"/>
+            <Entry Text="{Binding Name, Mode=TwoWay}" Placeholder="Enter item name"/>
 
-            <!-- Quantity Controls -->
+            <!-- Quantity -->
             <Label Text="Quantity" FontAttributes="Bold"/>
-            <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
-                <Button Text="−" Clicked="DecreaseQuantity" WidthRequest="50" HeightRequest="50"/>
-                <Label Text="{Binding Quantity}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="24"/>
-                <Button Text="+" Clicked="IncreaseQuantity" WidthRequest="50" HeightRequest="50"/>
-                
+            <Grid ColumnDefinitions="Auto,*,Auto" Padding="5" BackgroundColor="#89CFF0">
+                <Button Grid.Column="0" Text="−" Clicked="DecreaseQuantity" WidthRequest="50" HeightRequest="50"/>
+                <Label Grid.Column="1" Text="{Binding Quantity}" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Button Grid.Column="2" Text="+" Clicked="IncreaseQuantity" WidthRequest="50" HeightRequest="50" BackgroundColor="#4CAF50"/>
             </Grid>
 
-            <!-- Done/Status Toggle -->
+            <!-- Done -->
             <Label Text="Done?" FontAttributes="Bold"/>
-            <Switch IsToggled="{Binding Done}" />
+            <Switch IsToggled="{Binding Done, Mode=TwoWay}" />
 
             <!-- Action Buttons -->
             <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
@@ -35,6 +33,7 @@
 
             <!-- Optional Delete Button -->
             <Button Text="Delete" Clicked="OnDeleteClicked" BackgroundColor="#9E9E9E" TextColor="White"/>
+
         </StackLayout>
     </ScrollView>
 </ContentPage>

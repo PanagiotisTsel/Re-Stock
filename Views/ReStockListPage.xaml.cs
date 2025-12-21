@@ -12,11 +12,6 @@ public partial class ReStockListPage : ContentPage
     {
         InitializeComponent();
         BindingContext = this;
-
-        // Optional: initial sample items
-        Items.Add(new ReStockItem { Name = "Apples", Quantity = 5 });
-        Items.Add(new ReStockItem { Name = "Oranges", Quantity = 2 });
-        Items.Add(new ReStockItem { Name = "Bananas", Quantity = 10 });
     }
 
     private void ApplySort(int index, List<ReStockItem> items)
@@ -56,23 +51,21 @@ public partial class ReStockListPage : ContentPage
         ApplySort(SortPicker.SelectedIndex >= 0 ? SortPicker.SelectedIndex : 0, Items.ToList());
     }
 
-    void OnItemAdded(object sender, EventArgs e)
+    async void OnItemAdded(object sender, EventArgs e)
     {
         var newItem = new ReStockItem();
-        
-        Items.Add(newItem);
-        App.Database.SaveItemAsync(newItem);
-        Navigation.PushAsync(new ReStockItemPage(newItem));
+        await Navigation.PushAsync(new ReStockItemPage(newItem));
     }
 
 
-    private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.FirstOrDefault() is not ReStockItem item)
             return;
 
         // Navigate to edit page
-        Navigation.PushAsync(new ReStockItemPage { Item = item });
+        await Navigation.PushAsync(new ReStockItemPage(item));
+
 
         // Deselect item to avoid multiple triggers
         ((CollectionView)sender).SelectedItem = null;
@@ -84,5 +77,17 @@ public partial class ReStockListPage : ContentPage
             return;
 
         ApplySort(SortPicker.SelectedIndex, Items.ToList());
+    }
+
+     private void IncreaseQuantity(object sender, EventArgs e)
+    {
+        if (BindingContext is ReStockItem item)
+            item.Quantity++;
+    }
+
+    private void DecreaseQuantity(object sender, EventArgs e)
+    {
+        if (BindingContext is ReStockItem item && item.Quantity > 0)
+            item.Quantity--;
     }
 }

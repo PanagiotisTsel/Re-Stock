@@ -13,6 +13,7 @@ public partial class App : Application
 
         // Automatic database creation path
         string dbPath = Path.Combine(FileSystem.AppDataDirectory, "ReStockSQLite.db3");
+        Console.WriteLine($"DB path file: {dbPath}");
         Database = new ReStockItemDatabase(dbPath);
 
         MainPage = new NavigationPage(new ReStockListPage());
