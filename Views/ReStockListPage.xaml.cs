@@ -8,12 +8,14 @@ public partial class ReStockListPage : ContentPage
 {
     public ObservableCollection<ReStockItem> Items { get; set; } = new();
 
+
     public ReStockListPage()
     {
         InitializeComponent();
         BindingContext = this;
     }
 
+        
     private void ApplySort(int index, List<ReStockItem> items)
     {
         IEnumerable<ReStockItem> sorted = items;
@@ -38,6 +40,17 @@ public partial class ReStockListPage : ContentPage
         foreach (var item in sorted)
             Items.Add(item);
     }
+    private int _currentSortIndex = 0;
+
+    private void SortPicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (SortPicker.SelectedIndex < 0)
+            return;
+
+        _currentSortIndex = SortPicker.SelectedIndex;
+        ApplySort(_currentSortIndex, Items.ToList());
+    }
+    
 
     protected override async void OnAppearing()
     {
@@ -71,23 +84,27 @@ public partial class ReStockListPage : ContentPage
         ((CollectionView)sender).SelectedItem = null;
     }
 
-    private void SortPicker_SelectedIndexChanged(object sender, EventArgs e)
+     private async void IncreaseQuantity(object sender, EventArgs e)
     {
-        if (SortPicker.SelectedIndex < 0)
-            return;
-
-        ApplySort(SortPicker.SelectedIndex, Items.ToList());
-    }
-
-     private void IncreaseQuantity(object sender, EventArgs e)
-    {
-        if (BindingContext is ReStockItem item)
+        if (sender is Button button &&
+            button.BindingContext is ReStockItem item)
+        {
             item.Quantity++;
+            await App.Database.SaveItemAsync(item);
+            ApplySort(_currentSortIndex, Items.ToList());
+        }
     }
 
-    private void DecreaseQuantity(object sender, EventArgs e)
+    private async void DecreaseQuantity(object sender, EventArgs e)
     {
-        if (BindingContext is ReStockItem item && item.Quantity > 0)
+        if (sender is Button button &&
+            button.BindingContext is ReStockItem item &&
+            item.Quantity > 0)
+        {
             item.Quantity--;
+            await App.Database.SaveItemAsync(item);
+            ApplySort(_currentSortIndex, Items.ToList());
+        }
     }
+
 }

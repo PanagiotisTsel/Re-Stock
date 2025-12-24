@@ -15,12 +15,13 @@
 
             <!-- Quantity -->
             <Label Text="Quantity" FontAttributes="Bold"/>
-            <Grid ColumnDefinitions="Auto,*,Auto" Padding="5" BackgroundColor="#89CFF0">
-                <Button Grid.Column="0" Text="−" Clicked="DecreaseQuantity" WidthRequest="50" HeightRequest="50"/>
-                <Label Grid.Column="1" Text="{Binding Quantity}" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <Button Grid.Column="2" Text="+" Clicked="IncreaseQuantity" WidthRequest="50" HeightRequest="50" BackgroundColor="#4CAF50"/>
+            <!-- <Border BackgroundColor = "#89CFF0" Margin ="5" CornerRadius = "15"> -->
+            <Grid ColumnDefinitions="Auto,*,Auto" Padding="5">
+                    <Button Grid.Column="0" Text="−" Clicked="DecreaseQuantity" BackgroundColor="#F54927" WidthRequest="50" HeightRequest="50"/>
+                    <Label Grid.Column="1" Text="{Binding Quantity}" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Button Grid.Column="2" Text="+" Clicked="IncreaseQuantity" WidthRequest="50" HeightRequest="50" BackgroundColor="#4CAF50"/>
             </Grid>
-
+            <!-- </Border> -->
             <!-- Done -->
             <Label Text="Done?" FontAttributes="Bold"/>
             <Switch IsToggled="{Binding Done, Mode=TwoWay}" />
