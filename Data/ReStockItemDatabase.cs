@@ -12,6 +12,7 @@ public class ReStockItemDatabase
         _database = new SQLiteAsyncConnection(dbPath);
         //_database.DropTableAsync<ReStockItem>().Wait();
         _database.CreateTableAsync<ReStockItem>().Wait();
+        _database.CreateTableAsync<AppSettings>().Wait();
     }
 
     public Task<List<ReStockItem>> GetItemsAsync() =>
@@ -34,6 +35,12 @@ public class ReStockItemDatabase
         return result;
     }
 }
+
+    public Task<AppSettings> GetSettingsAsync() =>
+        _database.Table<AppSettings>().FirstOrDefaultAsync();
+
+    public Task<int> SaveSettingsAsync(AppSettings settings) =>
+        _database.InsertOrReplaceAsync(settings); 
 
 
     public Task<int> DeleteItemAsync(ReStockItem item) =>

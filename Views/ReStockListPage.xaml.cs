@@ -70,7 +70,6 @@ public partial class ReStockListPage : ContentPage
         await Navigation.PushAsync(new ReStockItemPage(newItem));
     }
 
-
     private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.FirstOrDefault() is not ReStockItem item)

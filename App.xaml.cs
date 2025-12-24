@@ -16,6 +16,6 @@ public partial class App : Application
         Console.WriteLine($"DB path file: {dbPath}");
         Database = new ReStockItemDatabase(dbPath);
 
-        MainPage = new NavigationPage(new ReStockListPage());
+        MainPage = new NavigationPage(new AppShell());
     }
 }

@@ -24,6 +24,7 @@
             </Picker.Items>
         </Picker>
 
+    
         <!-- CollectionView for items -->
         <CollectionView Grid.Row="1"
                         VerticalOptions="Fill"
@@ -42,8 +43,6 @@
                                     VerticalTextAlignment="Center"/>
                                 <Button Grid.Column="2" Text="−" Clicked="DecreaseQuantity" WidthRequest="40" HeightRequest="40" BackgroundColor = "#F54927" Margin = "5"/>          
                                 <Button Grid.Column="3" Text="+" Clicked="IncreaseQuantity" WidthRequest="40" HeightRequest="40" BackgroundColor="#4CAF50" Margin = "5"/>
-                          
-                        
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -54,5 +53,7 @@
                 Text="Add New Item"
                 Clicked="OnItemAdded"
                 Margin="20"/>
+
+        
     </Grid>
 </ContentPage>

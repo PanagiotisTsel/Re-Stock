@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ReStock.Views.ReStockSettings"
+    Title="Settings">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Label
+            Text="Settings"
+            FontSize="24"
+            FontAttributes="Bold" />
+
+        <HorizontalStackLayout>
+            <Label Text="Enable Dark Mode" VerticalOptions="Center" x:Name="DarkMode"/>
+            <Switch x:Name="DarkModeSwitch" Toggled="DarkModeMode" />
+        </HorizontalStackLayout>
+
+
+        <Button
+            Text="Clear All Data"
+            BackgroundColor="#E53935"
+            TextColor="White" />
+
+    </VerticalStackLayout>
+</ContentPage>
