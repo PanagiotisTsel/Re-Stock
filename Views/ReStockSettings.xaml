@@ -1,27 +1,34 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="ReStock.Views.ReStockSettings"
     Title="Settings">
 
+    <ScrollView>
     <VerticalStackLayout Padding="20" Spacing="15">
 
-        <Label
-            Text="Settings"
-            FontSize="24"
-            FontAttributes="Bold" />
+        <Label Text="Settings" FontSize="24" FontAttributes="Bold" />
 
         <HorizontalStackLayout>
-            <Label Text="Enable Dark Mode" VerticalOptions="Center" x:Name="DarkMode"/>
+            <Label Text="Enable Dark Mode" VerticalOptions="Center"/>
             <Switch x:Name="DarkModeSwitch" Toggled="DarkModeMode" />
         </HorizontalStackLayout>
 
+        <Label Text="Low Stock Threshold" />
+        <Entry x:Name="ThresholdEntry" Keyboard="Numeric" />
 
-        <Button
-            Text="Clear All Data"
-            BackgroundColor="#E53935"
-            TextColor="White" />
+        <Label Text="Low Stock Color" />
+        <HorizontalStackLayout Spacing="5">
+            <Button BackgroundColor="Red" Clicked="ColorSelected"/>
+            <Button BackgroundColor="Orange" Clicked="ColorSelected"/>
+            <Button BackgroundColor="Yellow" Clicked="ColorSelected"/>
+            <Button BackgroundColor="Green" Clicked="ColorSelected"/>
+            <Button BackgroundColor="Blue" Clicked="ColorSelected"/>
+        </HorizontalStackLayout>
 
+        <Button Text="Save Settings" Clicked="SaveSettings"/>
+        <Button Text="Clear All Data" BackgroundColor="#E53935" TextColor="White"/>
+        
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

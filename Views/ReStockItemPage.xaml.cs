@@ -66,8 +66,7 @@ public partial class ReStockItemPage : ContentPage
 //you will have to remove it eventually
     private void OnSaveClicked(object sender, EventArgs e)
 {
-    // No action needed: all changes are already auto-saved
-    DisplayAlert("Info", "Changes are automatically saved.", "OK");
+     DisplayAlert("Info", "Changes are automatically saved.", "OK");
 }
 
 

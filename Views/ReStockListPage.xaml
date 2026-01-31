@@ -36,7 +36,8 @@
 
                     <Grid ColumnDefinitions="*, Auto, Auto, Auto" Padding="10">
                         <Label Text="{Binding Name}"
-                               VerticalTextAlignment="Center"/>
+                               VerticalTextAlignment="Center"
+                               BackgroundColor="{Binding BackgroundColor}"/>
                                  <Label Text="{Binding Quantity}" 
                                     Padding = "15"
                                     Grid.Column="1"
