@@ -1,14 +1,37 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="ReStock.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:ReStock.Views"
-    Shell.FlyoutBehavior="Disabled">
+    x:Class="ReStock.AppShell"
+    Shell.NavBarIsVisible="False"
+    Title="ReStock">
 
-    <ShellContent
-        Title="ReStock"
-        ContentTemplate="{DataTemplate views:ReStockListPage}"
-        Route="ReStockList" />
+    <TabBar>
+
+        <!-- Main List Tab -->
+        <ShellContent Title="ReStock">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#xf03a;" FontFamily="FreeSolid" Color="Gray" />
+            </ShellContent.Icon>
+            <ShellContent.ContentTemplate>
+                <DataTemplate>
+                    <views:ReStockListPage />
+                </DataTemplate>
+            </ShellContent.ContentTemplate>
+        </ShellContent>
+
+        <!-- Settings Tab -->
+        <ShellContent Title="Settings">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#xf013;" FontFamily="FreeSolid" Color="Gray" />
+            </ShellContent.Icon>
+            <ShellContent.ContentTemplate>
+                <DataTemplate>
+                    <views:ReStockSettings />
+                </DataTemplate>
+            </ShellContent.ContentTemplate>
+        </ShellContent>
+
+    </TabBar>
 
 </Shell>

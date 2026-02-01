@@ -14,10 +14,8 @@ public partial class ReStockItemPage : ContentPage
         _item = item;
         BindingContext = _item;
 
-        // Determine if this is a new item
         _isNewItem = _item.ID == 0;
 
-        // Hook PropertyChanged for live save
         _item.PropertyChanged += Item_PropertyChanged;
     }
 
@@ -25,13 +23,11 @@ public partial class ReStockItemPage : ContentPage
     {
         if (_isNewItem)
         {
-            // Insert new item once
             await App.Database.SaveItemAsync(_item);
-            _isNewItem = false; // now has ID
-        }
+            _isNewItem = false;
+        } 
         else
         {
-            // Update existing item
             await App.Database.SaveItemAsync(_item);
         }
 
@@ -40,7 +36,6 @@ public partial class ReStockItemPage : ContentPage
 
     private async void OnCancelClicked(object sender, EventArgs e)
     {
-        // If this was a new item and Cancel is pressed, delete it
         if (_item.ID != 0 && _isNewItem)
         {
             await App.Database.DeleteItemAsync(_item);
@@ -63,12 +58,7 @@ public partial class ReStockItemPage : ContentPage
     }
 
 
-//you will have to remove it eventually
-    private void OnSaveClicked(object sender, EventArgs e)
-{
-    // No action needed: all changes are already auto-saved
-    DisplayAlert("Info", "Changes are automatically saved.", "OK");
-}
+
 
 
     private async void OnDeleteClicked(object sender, EventArgs e)

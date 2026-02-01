@@ -70,17 +70,13 @@ public partial class ReStockListPage : ContentPage
         await Navigation.PushAsync(new ReStockItemPage(newItem));
     }
 
-
     private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.FirstOrDefault() is not ReStockItem item)
             return;
 
-        // Navigate to edit page
         await Navigation.PushAsync(new ReStockItemPage(item));
 
-
-        // Deselect item to avoid multiple triggers
         ((CollectionView)sender).SelectedItem = null;
     }
 
@@ -106,5 +102,17 @@ public partial class ReStockListPage : ContentPage
             ApplySort(_currentSortIndex, Items.ToList());
         }
     }
+
+    private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var filtered = string.IsNullOrWhiteSpace(e.NewTextValue)
+            ? App.Database.GetItemsAsync().Result
+            : App.Database.GetItemsAsync().Result
+                .Where(i => i.Name.Contains(e.NewTextValue, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+        ApplySort(_currentSortIndex, filtered);
+    }
+
 
 }

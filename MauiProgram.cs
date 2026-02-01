@@ -27,6 +27,9 @@ public static class MauiProgram
 
             AddFontOnce("OpenSans-Regular.ttf", "OpenSansRegular");
             AddFontOnce("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            AddFontOnce("Font Awesome 7 Brands-Regular-400.otf", "BrandsRegular");
+            AddFontOnce("Font Awesome 7 Free-Regular-400.otf", "FreeRegular");
+            AddFontOnce("Font Awesome 7 Free-Solid-900.otf", "FreeSolid");;
         });
 
         builder.Services.AddSingleton<ReStockListPage>();
