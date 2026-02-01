@@ -119,3 +119,13 @@ dotnet clean
 dotnet build -f net10.0-ios
 xcrun simctl shutdown all
 xcrun simctl erase all
+
+
+Renew the app every 7 days:
+
+
+dotnet run \
+  -f net10.0-ios \
+  -c Debug \
+  -p:RuntimeIdentifier=ios-arm64 \
+  -p:DeviceName="iPhone - Panos"
