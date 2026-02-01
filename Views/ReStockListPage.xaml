@@ -9,31 +9,47 @@
              Title="ReStock"
              x:DataType="views:ReStockListPage">
 
-    <Grid RowDefinitions="Auto, *, Auto">
-        <!-- Picker for sorting -->
-        <Picker Grid.Row="0"
-                x:Name="SortPicker"
-                FontSize = "16"
-                Title="Sort by ↓"
-                SelectedIndexChanged="SortPicker_SelectedIndexChanged">
-            <Picker.Items>
-                <x:String>Quantity (Low - High)</x:String>
-                <x:String>Quantity (High - Low)</x:String>
-                <x:String>Name (A - Z)</x:String>
-                <x:String>Name (Z - A)</x:String>
-            </Picker.Items>
-        </Picker>
+    <Grid RowDefinitions="Auto, Auto, *, Auto">
+        <!-- Search Bar -->
+    <SearchBar Grid.Row="0"
+               x:Name="SearchBar"
+               Placeholder="Search items..."
+               TextChanged="SearchBar_TextChanged"
+               FontSize="16"
+               Margin="10"
+               BackgroundColor="White"
+               TextColor="Black"
+               PlaceholderColor="Gray"/>
 
+    <!-- Picker for sorting -->
+    <Picker Grid.Row="1"
+            x:Name="SortPicker"
+            FontSize="16"
+            Title="Sort by ↓"
+            SelectedIndexChanged="SortPicker_SelectedIndexChanged"
+            Margin="10">
+        <Picker.Items>
+            <x:String>Quantity (Low - High)</x:String>
+            <x:String>Quantity (High - Low)</x:String>
+            <x:String>Name (A - Z)</x:String>
+            <x:String>Name (Z - A)</x:String>
+        </Picker.Items>
+    </Picker>
     
         <!-- CollectionView for items -->
-        <CollectionView Grid.Row="1"
+        <CollectionView Grid.Row="2"
                         VerticalOptions="Fill"
                         ItemsSource="{Binding Items}"
                         SelectionMode="Single"
                         SelectionChanged="CollectionView_SelectionChanged">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:ReStockItem">
-
+ <Frame 
+            Padding="10"
+            Margin="5"
+            CornerRadius="10"
+            BackgroundColor="{Binding BackgroundColor}"
+            HasShadow="False">
                     <Grid ColumnDefinitions="*, Auto, Auto, Auto" Padding="10">
                         <Label Text="{Binding Name}"
                                VerticalTextAlignment="Center"
@@ -42,15 +58,16 @@
                                     Padding = "15"
                                     Grid.Column="1"
                                     VerticalTextAlignment="Center"/>
-                                <Button Grid.Column="2" Text="−" Clicked="DecreaseQuantity" WidthRequest="40" HeightRequest="40" BackgroundColor = "#F54927" Margin = "5"/>          
-                                <Button Grid.Column="3" Text="+" Clicked="IncreaseQuantity" WidthRequest="40" HeightRequest="40" BackgroundColor="#4CAF50" Margin = "5"/>
+                                <Button Grid.Column="2" Text="−" Clicked="DecreaseQuantity" WidthRequest="55" HeightRequest="55" BackgroundColor = "#F54927" Margin = "5"/>          
+                                <Button Grid.Column="3" Text="+" Clicked="IncreaseQuantity" WidthRequest="55" HeightRequest="55" BackgroundColor="#4CAF50" Margin = "5"/>
                     </Grid>
+            </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
         <!-- Add Item button -->
-        <Button Grid.Row="2"
+        <Button Grid.Row="3"
                 Text="Add New Item"
                 Clicked="OnItemAdded"
                 Margin="20"/>

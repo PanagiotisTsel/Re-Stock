@@ -1,25 +1,36 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <Shell
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:ReStock.Views"
     x:Class="ReStock.AppShell"
     Shell.NavBarIsVisible="False"
-    Title = "ReStock">
+    Title="ReStock">
 
     <TabBar>
 
         <!-- Main List Tab -->
-        <ShellContent
-            Title="ReStock"
-            Icon="list.png"
-            ContentTemplate="{DataTemplate views:ReStockListPage}" />
+        <ShellContent Title="ReStock">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#xf03a;" FontFamily="FreeSolid" Color="Gray" />
+            </ShellContent.Icon>
+            <ShellContent.ContentTemplate>
+                <DataTemplate>
+                    <views:ReStockListPage />
+                </DataTemplate>
+            </ShellContent.ContentTemplate>
+        </ShellContent>
 
         <!-- Settings Tab -->
-        <ShellContent
-            Title="Settings"
-            Icon="settings.png"
-            ContentTemplate="{DataTemplate views:ReStockSettings}" />
+        <ShellContent Title="Settings">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#xf013;" FontFamily="FreeSolid" Color="Gray" />
+            </ShellContent.Icon>
+            <ShellContent.ContentTemplate>
+                <DataTemplate>
+                    <views:ReStockSettings />
+                </DataTemplate>
+            </ShellContent.ContentTemplate>
+        </ShellContent>
 
     </TabBar>
 

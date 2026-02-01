@@ -9,16 +9,16 @@
 
         <Label Text="Settings" FontSize="24" FontAttributes="Bold" />
 
-        <HorizontalStackLayout>
+        <!-- <HorizontalStackLayout>
             <Label Text="Enable Dark Mode" VerticalOptions="Center"/>
             <Switch x:Name="DarkModeSwitch" Toggled="DarkModeMode" />
-        </HorizontalStackLayout>
+        </HorizontalStackLayout> -->
 
         <Label Text="Low Stock Threshold" />
         <Entry x:Name="ThresholdEntry" Keyboard="Numeric" />
 
         <Label Text="Low Stock Color" />
-        <HorizontalStackLayout Spacing="5">
+        <HorizontalStackLayout x:Name="ColorButtonsLayout" Spacing="5">
             <Button BackgroundColor="Red" Clicked="ColorSelected"/>
             <Button BackgroundColor="Orange" Clicked="ColorSelected"/>
             <Button BackgroundColor="Yellow" Clicked="ColorSelected"/>

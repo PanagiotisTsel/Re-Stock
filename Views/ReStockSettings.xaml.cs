@@ -18,7 +18,7 @@ public partial class ReStockSettings : ContentPage
         base.OnAppearing();
 
         var settings = await App.Database.GetSettingsAsync();
-        DarkModeSwitch.IsToggled = settings?.IsDarkMode ?? false;
+        // DarkModeSwitch.IsToggled = settings?.IsDarkMode ?? false;
         ThresholdEntry.Text = settings?.LowStockThreshold.ToString() ?? "2";
         selectedColor = settings?.LowStockColor ?? Colors.LightPink;
     }
@@ -28,11 +28,25 @@ public partial class ReStockSettings : ContentPage
         App.Current.UserAppTheme = e.Value ? AppTheme.Dark : AppTheme.Light;
     }
 
-    void ColorSelected(object sender, EventArgs e)
+    async void ColorSelected(object sender, EventArgs e)
     {
         if (sender is Button btn)
+        {
             selectedColor = btn.BackgroundColor;
+
+            foreach (var b in ColorButtonsLayout.Children.OfType<Button>())
+            {
+                b.BorderColor = Colors.Transparent;
+                b.BorderWidth = 0;
+            }
+
+            btn.BorderColor = Colors.Black;
+            btn.BorderWidth = 2;
+
+            await DisplayAlert("Color Selected", $"You selected {selectedColor.ToHex()}", "OK");
+        }
     }
+
 
     async void SaveSettings(object sender, EventArgs e)
     {
@@ -44,14 +58,14 @@ public partial class ReStockSettings : ContentPage
             Id = 1,
             LowStockThreshold = threshold,
             LowStockColor = selectedColor,
-            IsDarkMode = DarkModeSwitch.IsToggled
+            // IsDarkMode = DarkModeSwitch.IsToggled
         };
 
         await App.Database.SaveSettingsAsync(settings);
 
         await DisplayAlert("Settings", "Low stock settings saved!", "OK");
 
-        // Refresh list page colors
+        // Update list page colors
         var page = Application.Current.Windows[0].Page;
         if (page is NavigationPage navPage &&
             navPage.CurrentPage is ReStockListPage listPage)

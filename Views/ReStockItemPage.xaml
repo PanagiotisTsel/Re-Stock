@@ -28,8 +28,8 @@
 
             <!-- Action Buttons -->
             <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-                <Button Text="Save" Clicked="OnSaveClicked" BackgroundColor="#4CAF50" TextColor="White"/>
-                <Button Text="Cancel" Clicked="OnCancelClicked" BackgroundColor="#F44336" TextColor="White"/>
+                <!-- <Button Text="Save" Clicked="OnSaveClicked" BackgroundColor="#4CAF50" TextColor="White"/> -->
+                 <Button Text="Back" Clicked="OnCancelClicked" BackgroundColor="#4CAF50" TextColor="White"/> <!--this is green for now -->
             </Grid>
 
             <!-- Optional Delete Button -->
